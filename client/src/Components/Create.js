@@ -27,13 +27,13 @@ class Create extends React.Component {
 
   handleChange(event) {
     this.setState({[event.target.name] : event.target.value});
-    console.log(event.target.name + ", " + event.target.value);
+    //console.log(event.target.name + ", " + event.target.value);
   }
 
   //this is where the call to the database will be made
   handleSubmit(event) {
     //pop up
-    alert('This was submitted: ' + this.state.name + this.state.category);
+   // alert('This was submitted: ' + this.state.name + this.state.category);
     //prevents default values being used
     event.preventDefault();
 
@@ -41,7 +41,14 @@ class Create extends React.Component {
     axios.post("http://localhost:3001/create",
     {
       category : this.state.category,
-      name : this.state.name
+      type : this.state.type,
+      name : this.state.name,
+      born : this.state.born,
+      died : this.state.died,
+      nationality : this.state.nationality,
+      knownFor : this.state.knownFor,
+      notableWork : this.state.notableWork,
+      about : this.state.about
     });
 
     //state reset for the fields.
@@ -65,12 +72,19 @@ class Create extends React.Component {
         <label>
           Category:
           <input type="text" 
-                 //defaultValue={"i.e 'Technology'"}
                  value={this.state.category} 
                  onChange={this.handleChange}
                  name="category" />
         </label>
+        <br></br>
 
+        <label>
+          Type:
+          <input type="text" 
+                 value={this.state.type} 
+                 onChange={this.handleChange}
+                 name="type" />
+        </label>
         <br></br>
 
         <label>
@@ -82,94 +96,64 @@ class Create extends React.Component {
         </label>
         <br></br>
         
+        <label>
+          Born:
+          <input type="text" 
+                 value={this.state.born} 
+                 onChange={this.handleChange}
+                 name="born" />
+        </label>
         <br></br>
+        
+        <label>
+          Died:
+          <input type="text" 
+                 value={this.state.died} 
+                 onChange={this.handleChange}
+                 name="died" />
+        </label>
+        <br></br>
+        
+        <label>
+          Nationality:
+          <input type="text" 
+                 value={this.state.nationality} 
+                 onChange={this.handleChange}
+                 name="nationality" />
+        </label>
+        <br></br>
+        
+        <label>
+          Known for:
+          <input type="text" 
+                 value={this.state.knownFor} 
+                 onChange={this.handleChange}
+                 name="knownFor" />
+        </label>
+        <br></br>
+        
+        <label>
+          Notable work:
+          <input type="text" 
+                 value={this.state.notableWork} 
+                 onChange={this.handleChange}
+                 name="notableWork" />
+        </label>
+        <br></br>
+        
+        <label>
+          About:
+          <input type="text" 
+                 value={this.state.about} 
+                 onChange={this.handleChange}
+                 name="about" />
+        </label>
+        <br></br>
+
+  
         <input type="submit" value="Submit" />
       </form>
     );
   }
 }
 export default Create
-
-
-
-
-// import React, { useState } from "react";
-// import { useNavigate } from "react-router";
- 
-// export default function Create() {
-//  const [form, setForm] = useState({
-//    name: "",
-//    position: "",
-//    level: "",
-//  });
-//  const navigate = useNavigate();
- 
-//  // These methods will update the state properties.
-//  function updateForm(value) {
-//    return setForm((prev) => {
-//      return { ...prev, ...value };
-//    });
-//  }
- 
-//  // This function will handle the submission.
-//  async function onSubmit(e) {
-//    e.preventDefault();
- 
-//    // When a post request is sent to the create url, we'll add a new record to the database.
-//    const newPerson = { ...form };
- 
-//    await fetch("http://localhost:3000/record/add", {
-//      method: "POST",
-//      headers: {
-//        "Content-Type": "application/json",
-//      },
-//      body: JSON.stringify(newPerson),
-//    })
-//    .catch(error => {
-//      window.alert(error);
-//      return;
-//    });
- 
-//    setForm({ name: "", position: "", level: "" });
-//    navigate("/");
-//  }
- 
-//  // This following section will display the form that takes the input from the user.
-//  return (
-//    <div>
-//      <h3>Create New Record</h3>
-//      <form onSubmit={onSubmit}>
-//        <div className="form-group">
-//          <label htmlFor="name">Name</label>
-//          <input
-//            type="text"
-//            className="form-control"
-//            id="name"
-//            value={form.name}
-//            onChange={(e) => updateForm({ name: e.target.value })}
-//          />
-//        </div>
-
-
-//        <div className="form-group">
-//          <label htmlFor="position">Position</label>
-//          <input
-//            type="text"
-//            className="form-control"
-//            id="position"
-//            value={form.position}
-//            onChange={(e) => updateForm({ position: e.target.value })}
-//          />
-//        </div>
-       
-//        <div className="form-group">
-//          <input
-//            type="submit"
-//            value="Create person"
-//            className="btn btn-primary"
-//          />
-//        </div>
-//      </form>
-//    </div>
-//  );
-// }
