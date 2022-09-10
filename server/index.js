@@ -55,8 +55,22 @@ app.get('/read/technology', async (req, res) => {
 });
 
 // API to create a new db entry or POST
+app.post('/create', async (req, res) => {
 
+    const category = req.body.category;
+    const name = req.body.name
 
+    const article = new ArticleModel({category: category, name: name})
+
+    try {
+        await article.save();
+        res.send("inserted data");
+    }
+    catch(err){
+        console.log(err);
+    }
+
+});
 
 // Set port from local host to run backend server on
 app.listen(3001, () => {
