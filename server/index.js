@@ -54,6 +54,10 @@ app.get('/read/technology', async (req, res) => {
     });
 });
 
+// API to create a new db entry or POST
+
+
+
 // Set port from local host to run backend server on
 app.listen(3001, () => {
     console.log("Server running on port 3001....")
