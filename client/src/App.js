@@ -15,8 +15,10 @@ import Technology from './Components/Categories/Technology';
 function App() {
   return (
     <div className="App">
-      <Router>
-        <NavBar />
+
+
+      <Router >
+        <NavBar  />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />

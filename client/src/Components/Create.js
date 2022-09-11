@@ -1,5 +1,5 @@
 import React from 'react'
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 
 //We use a class based component to create the form
 
