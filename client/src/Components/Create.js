@@ -33,36 +33,31 @@ class Create extends React.Component {
   //this is where the call to the database will be made
   handleSubmit(event) {
     //pop up
-   // alert('This was submitted: ' + this.state.name + this.state.category);
+    // alert('This was submitted: ' + this.state.name + this.state.category);
     //prevents default values being used
     event.preventDefault();
 
-    //send post request to server
-    axios.post("http://localhost:3001/create",
-    {
-      category : this.state.category,
-      type : this.state.type,
-      name : this.state.name,
-      born : this.state.born,
-      died : this.state.died,
-      nationality : this.state.nationality,
-      knownFor : this.state.knownFor,
-      notableWork : this.state.notableWork,
-      about : this.state.about
-    });
-
-    //state reset for the fields.
-    this.setState({
-      category: '',
-      type: '',
-      name: '',
-      born: '',
-      died: '',
-      nationality: '',
-      knownFor: '',
-      notableWork: '',
-      about: ''
-      });
+    //attempt to send post request to server
+    try{
+      axios.post("http://localhost:3001/create",
+      {
+        category : this.state.category,
+        type : this.state.type,
+        name : this.state.name,
+        born : this.state.born,
+        died : this.state.died,
+        nationality : this.state.nationality,
+        knownFor : this.state.knownFor,
+        notableWork : this.state.notableWork,
+        about : this.state.about
+      });   
+      //notify user of submission
+      alert('Your new aricle was submitted: /n' + this.state.name +'; '+ this.state.category); 
+    }
+    catch(err){
+      //notify user of error.
+      alert('err')
+    }
   }
 
   render() {
@@ -72,6 +67,7 @@ class Create extends React.Component {
         <label>
           Category:
           <input type="text" 
+                 placeholder='i.e Art'
                  value={this.state.category} 
                  onChange={this.handleChange}
                  name="category" />
@@ -81,6 +77,7 @@ class Create extends React.Component {
         <label>
           Type:
           <input type="text" 
+                 placeholder='i.e Biography'
                  value={this.state.type} 
                  onChange={this.handleChange}
                  name="type" />
@@ -90,6 +87,7 @@ class Create extends React.Component {
         <label>
           Name:
           <input type="text" 
+                 placeholder='i.e Da Vinci'
                  value={this.state.name} 
                  onChange={this.handleChange}
                  name="name" />
@@ -99,6 +97,7 @@ class Create extends React.Component {
         <label>
           Born:
           <input type="text" 
+                 placeholder='i.e 1950'
                  value={this.state.born} 
                  onChange={this.handleChange}
                  name="born" />
@@ -108,6 +107,7 @@ class Create extends React.Component {
         <label>
           Died:
           <input type="text" 
+                 placeholder='i.e 2010'
                  value={this.state.died} 
                  onChange={this.handleChange}
                  name="died" />
@@ -116,7 +116,8 @@ class Create extends React.Component {
         
         <label>
           Nationality:
-          <input type="text" 
+          <input type="text"
+                 placeholder='i.e Italian'
                  value={this.state.nationality} 
                  onChange={this.handleChange}
                  name="nationality" />
@@ -125,7 +126,8 @@ class Create extends React.Component {
         
         <label>
           Known for:
-          <input type="text" 
+          <input type="text"
+                 placeholder='i.e areas of expertise'
                  value={this.state.knownFor} 
                  onChange={this.handleChange}
                  name="knownFor" />
@@ -135,6 +137,7 @@ class Create extends React.Component {
         <label>
           Notable work:
           <input type="text" 
+                 placeholder='i.e the Mona Lisa'
                  value={this.state.notableWork} 
                  onChange={this.handleChange}
                  name="notableWork" />
@@ -143,14 +146,17 @@ class Create extends React.Component {
         
         <label>
           About:
-          <input type="text" 
+          <textarea 
+                 rows="5"
+                 cols="100"
+                 type="text" 
+                 placeholder='Body of the article goes here...'
                  value={this.state.about} 
                  onChange={this.handleChange}
                  name="about" />
         </label>
         <br></br>
 
-  
         <input type="submit" value="Submit" />
       </form>
     );
