@@ -1,10 +1,8 @@
-import React from 'react'
-import axios, { Axios } from 'axios';
+import React from 'react';
+import axios from 'axios';
 
-//We use a class based component to create the form
-
-//The form that allows users to enter information into the article collection
-class Create extends React.Component {
+//We use a class based component to create the form allowing users to create articles.
+export default class Create extends React.Component {
   //Class object constructor method sets up the variable for the different states of the articles.
   constructor(props) {
     super(props);
@@ -25,21 +23,19 @@ class Create extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  //Updates the values of the forms fields when user types in them.
   handleChange(event) {
+    //maps the events to their respective targets using the name fields.
     this.setState({[event.target.name] : event.target.value});
-    //console.log(event.target.name + ", " + event.target.value);
   }
 
   //this is where the call to the database will be made
   handleSubmit(event) {
-    //pop up
-    // alert('This was submitted: ' + this.state.name + this.state.category);
     //prevents default values being used
     event.preventDefault();
 
     //attempt to send post request to server
-    try{
-      axios.post("http://localhost:3001/create",
+       axios.post("http://localhost:3001/create",
       {
         category : this.state.category,
         type : this.state.type,
@@ -50,22 +46,48 @@ class Create extends React.Component {
         knownFor : this.state.knownFor,
         notableWork : this.state.notableWork,
         about : this.state.about
+      })
+
+      //what it does with successfull POST
+      .then(function (response) {
+        console.log(response);
+        alert('Article created')
+        document.location.href="/";
+
+      })
+
+      //What it does with errors.
+      .catch(function (error){
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          alert('response error')
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+          alert('request error')
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+        alert('other error')
       });   
-      //notify user of submission
-      alert('Your new aricle was submitted: /n' + this.state.name +'; '+ this.state.category); 
-    }
-    catch(err){
-      //notify user of error.
-      alert('err')
-    }
   }
 
+  //Render deals with displaying the form to the user.
   render() {
     return (
+      //Links the form submission to the above handle.
       <form onSubmit={this.handleSubmit}>
         
         <label>
-          Category:
+          Category: 
           <input type="text" 
                  placeholder='i.e Art'
                  value={this.state.category} 
@@ -162,4 +184,3 @@ class Create extends React.Component {
     );
   }
 }
-export default Create
