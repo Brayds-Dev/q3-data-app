@@ -4,7 +4,7 @@
         background-image: url("bg.jpg");
         background-repeat: no-repeat, repeat;
         background-size: cover; /* Resize the background image to cover the entire container */
-        height: 900px;
+        height: 650px;
     } 
        
     form {
