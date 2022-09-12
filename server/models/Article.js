@@ -12,10 +12,10 @@ const ArticleSchema = new mongoose.Schema({
         type: String,
     },
     born: {
-        type: Number,
+        type: String,
     },
     died: {
-        type: Number,
+        type: String,
     },
     nationality: {
         type: String
