@@ -1,7 +1,8 @@
 
-    background-color: gainsboro;
-    }
-    
+    body {
+        background-color: gainsboro;
+    } 
+       
     form {
         border: silver thin solid;
         padding: 2rem;
