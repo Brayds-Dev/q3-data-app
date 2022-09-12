@@ -9,7 +9,6 @@ app.use(cors());
 
 const ArticleModel = require('./models/Article.js');
 
-
 mongoose.connect("mongodb+srv://bdaw211:ZmAKUg7kKKEVltlC@teamproject.o3vp87l.mongodb.net/schooldb?retryWrites=true&w=majority", {
     useNewUrlParser: true,
 });
@@ -53,6 +52,46 @@ app.get('/read/technology', async (req, res) => {
         res.send(result);
     });
 });
+
+// API to create a new db entry or POST
+app.post('/create', async (req, res) => {
+
+    //gets the data from the front end form
+    const category = req.body.category;
+    const type = req.body.type;
+    const name = req.body.name;
+    const born = req.body.born;
+    const died = req.body.died;
+    const nationality = req.body.nationality;
+    const knownFor = req.body.knownFor;
+    const notableWork = req.body.notableWork;
+    const about = req.body.about;
+
+    //creates a new article with the above data
+    const article = new ArticleModel(
+        {
+            category: category, 
+            type: type,
+            name: name,
+            born: born,
+            died: died,
+            nationality: nationality,
+            knownFor: knownFor,
+            notableWork: notableWork,
+            about: about,
+        })
+    
+    //uses try-catch to attempt to save the data to the db, logging any errors.
+    try {
+        await article.save();
+        res.send("inserted data");
+    }
+    catch(err){
+        console.log(err);
+        return(err);
+    }
+});
+
 
 // Set port from local host to run backend server on
 app.listen(3001, () => {

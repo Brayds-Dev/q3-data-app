@@ -1,0 +1,25 @@
+
+    body {
+        background-color: gainsboro;
+    } 
+       
+    form {
+        border: silver thin solid;
+        padding: 2rem;
+    }
+    
+    form label {
+    
+        display: flex;
+        align-items: right;
+    
+    }
+    
+    label input { 
+        flex-grow: 2;
+    
+    }
+    
+    nav { 
+        display: block;
+    }
