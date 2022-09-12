@@ -88,9 +88,10 @@ app.post('/create', async (req, res) => {
     }
     catch(err){
         console.log(err);
+        return(err);
     }
-
 });
+
 
 // Set port from local host to run backend server on
 app.listen(3001, () => {
