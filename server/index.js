@@ -88,6 +88,7 @@ app.post('/create', async (req, res) => {
     }
     catch(err){
         console.log(err);
+        return(err);
     }
 });
 

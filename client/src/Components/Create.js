@@ -47,17 +47,15 @@ export default class Create extends React.Component {
         notableWork : this.state.notableWork,
         about : this.state.about
       })
-
       //what it does with successfull POST
       .then(function (response) {
         console.log(response);
         alert('Article created')
         document.location.href="/";
-
       })
-
       //What it does with errors.
       .catch(function (error){
+        alert('other error')
         if (error.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
@@ -65,18 +63,20 @@ export default class Create extends React.Component {
           console.log(error.response.status);
           console.log(error.response.headers);
           alert('response error')
-        } else if (error.request) {
+        } 
+        else if (error.request) {
           // The request was made but no response was received
           // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
           // http.ClientRequest in node.js
           console.log(error.request);
           alert('request error')
-        } else {
+        } 
+        else {
           // Something happened in setting up the request that triggered an Error
           console.log('Error', error.message);
         }
         console.log(error.config);
-        alert('other error')
+        
       });   
   }
 
