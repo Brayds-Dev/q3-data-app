@@ -1,28 +1,27 @@
 import React from 'react'
-import "./Login.css"
+import './Login.css'
 
 function Login() {
   return (
-    <div>
-        <h1>Login Page</h1>
-        <form action="">  
+    <div class="container">
+      <h1> School DB Login</h1>
+
+      <form action="">  
         <field>
           <label htmlFor="">User</label>
           <input type="text" name="" id="" />
         </field>
+          
         <field>
           <label htmlFor="" >Password</label>
           <input type="password" name="" id="" />
         </field>
 
-      <field>
-        <button>Submit</button>
-      </field>
+        <field class="submit">
+          <button>Submit</button>
+        </field>
 
-
-
-          
-        </form>
+      </form>
 
     </div>
   )

@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react'
+
 import Axios from 'axios';
 import './Home.css';
+import NavBar from './NavBar';
+
 
 function Home() {
     
@@ -18,19 +21,24 @@ function Home() {
       }, []);
 
   return (
-    <div>
+     <>
+      <NavBar />
+      <div>
         <h1>Article List</h1>
-        <input type="search" name='searchTerm' placeholder='title keyword....' onChange={(event)=>{setTextSearch(event.target.value)}} />
-        
-        {articleList.filter(({name})=>name.toLowerCase().includes(textSearch.toLowerCase())).map((value, key) => {
-            return (
-                
-                <div key={key}>
-                    <h3>{value.name}</h3>
-                </div>
-            )
+
+        <input type="search" name='searchTerm' placeholder='title keyword....' onChange={(event) => { setTextSearch(event.target.value); } } />
+
+        {articleList.filter(({ name }) => name.toLowerCase().includes(textSearch.toLowerCase())).map((value, key) => {
+          return (
+
+            <div key={key}>
+              <h3>{value.name}</h3>
+            </div>
+          );
         })}
-    </div>
+      </div>
+      </>
+    
   )
 }
 
