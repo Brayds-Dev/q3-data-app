@@ -3,17 +3,6 @@ import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 import {Link, useParams,} from 'react-router-dom'
 
-//first - test getting the id from the parent component into a prop here.
-//now working
-
-//second, make sure its formatted correctly
-//formatting correct - had to get read of that sneaky '}'
-
-//check axios is returning data to me 
-//yea that bits working too
-
-//so the data returned is an object - how to view all the fields?
-//article.<fieldname>. Duh
 
 //how to iterate each field and display them nicely?
 
