@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios';
+import NavBar from '../NavBar';
 
 function Arts() {
     const [artsArticleList, setArtsArticleList] = useState([]);
@@ -12,6 +13,8 @@ function Arts() {
       }, []);
 
   return (
+    <>
+    <NavBar/>
     <div>
         <h1>Arts page...</h1>
 
@@ -23,6 +26,7 @@ function Arts() {
         )
 })}
     </div>
+    </>
     
   )
 }
