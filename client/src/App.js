@@ -10,9 +10,12 @@ import Create from './Components/Create';
 import Arts from './Components/Categories/Arts';
 import Mathematics from './Components/Categories/Mathematics';
 import Technology from './Components/Categories/Technology';
+
 import ArticleDetail from './Components/ArticleDetail';
 
 function App() {
+
+
   return (
     <div className="App">
       <Router >

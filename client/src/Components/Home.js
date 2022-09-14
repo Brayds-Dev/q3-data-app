@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react'
+
 import Axios from 'axios';
 import './Home.css';
+
 import {Link,} from 'react-router-dom';
+
 
 function Home() {
     
@@ -23,8 +26,10 @@ function Home() {
     };
 
   return (
-    <div>
+      
+      <div>
         <h1>Article List</h1>
+
         <input type="search" 
                name='searchTerm' 
                placeholder='title keyword....' 
