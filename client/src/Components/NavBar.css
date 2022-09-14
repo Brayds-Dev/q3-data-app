@@ -1,3 +1,49 @@
+
+nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    overflow: hidden;
+    background-color: rgb(42, 40, 40);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border: 2px solid rgb(8, 8, 8);
+    padding-left: 20px;
+}
+  
+h4 {
+    display: inline-block;
+    margin: 5px;
+    padding: 20px;
+    border: 3px solid rgb(115, 109, 109);
+    background-color: white;
+    color: #111;
+    border-radius: 1px;
+    padding: 12px;
+    margin-right: 18px;
+}
+  
+  
+h4 link {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 20px 30px;
+    text-decoration: none;
+    margin: 50px;
+}
+
+
+  
+h4 link:hover:not(.active) {
+    background-color: #111;
+}
+  
+.active {
+    background-color: #5bf7bd;
+}
+
 /*.navbar {
     display: block;
     justify-content: space-evenly;
@@ -24,3 +70,4 @@ a {
     margin: 0 1rem;
     text-decoration: none;
 }
+

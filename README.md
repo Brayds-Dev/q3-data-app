@@ -8,3 +8,4 @@ then, in the terminal go to the client directory and use the command "npm start"
 in the terminal, go to the server folder and use the command "npm run devStart"
 
 (using a split terminal to see client and server command lines at once helps here.)
+
