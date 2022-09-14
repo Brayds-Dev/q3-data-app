@@ -16,6 +16,11 @@ function Home() {
           setArticleList(response.data);
         });
       }, []);
+      
+    const deleteArticle = (id) => {
+    Axios.delete(`http://localhost:3001/delete/${id}`);
+    window.location.reload();
+    };
 
   return (
     <div>
@@ -30,11 +35,12 @@ function Home() {
             return (
                 <div key={key}>
                     <h3><Link to={{pathname: `${value._id}`}}>{value.name}</Link></h3>
+                    <button onClick={() => deleteArticle(value._id)}>Delete</button>
                 </div>
             )
         })}
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
