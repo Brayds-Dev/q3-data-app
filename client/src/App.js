@@ -10,18 +10,16 @@ import Create from './Components/Create';
 import Arts from './Components/Categories/Arts';
 import Mathematics from './Components/Categories/Mathematics';
 import Technology from './Components/Categories/Technology';
-import { useState } from 'react';
 
+import ArticleDetail from './Components/ArticleDetail';
 
 function App() {
 
 
   return (
     <div className="App">
-
-
-       <Router > 
-  
+      <Router >
+        <NavBar  />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
@@ -29,6 +27,8 @@ function App() {
           <Route path='/arts' element={<Arts />} />
           <Route path='/mathematics' element={<Mathematics />} />
           <Route path='/technology' element={<Technology />} />
+          
+          <Route path='/:articleID' element={<ArticleDetail />} />
         </Routes>
       </Router>
     </div>
