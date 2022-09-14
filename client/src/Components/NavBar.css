@@ -44,16 +44,23 @@ h4 link:hover:not(.active) {
     background-color: #5bf7bd;
 }
 
-/*.navbar {
+.navbar {
     display: block;
     justify-content: space-evenly;
     align-content: space-between;
     gap: 2rem;
     width: 100%;
-} */
+}
 
 li {
     list-style: none;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+li a {
+    color: antiquewhite;
+    text-decoration: none;
 }
 
 .left {
