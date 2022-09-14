@@ -10,6 +10,7 @@ import Create from './Components/Create';
 import Arts from './Components/Categories/Arts';
 import Mathematics from './Components/Categories/Mathematics';
 import Technology from './Components/Categories/Technology';
+import Update from './Components/Categories/Update';
 
 import ArticleDetail from './Components/ArticleDetail';
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/arts' element={<Arts />} />
           <Route path='/mathematics' element={<Mathematics />} />
           <Route path='/technology' element={<Technology />} />
+          <Route path='/update' element={<Update />} />
 
           {/* These route to article detail depending on which component you click on them from. */}
           <Route path='/:articleID' element={<ArticleDetail />} />
