@@ -43,7 +43,6 @@ function ArticleDetail(props)  {
         <h2>{article.name}</h2>
         <h2>{article.type}</h2>
         <p>{article.about}</p>
-
       </div>
     );
   }
