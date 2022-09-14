@@ -1,6 +1,4 @@
-
 import React from 'react';
-
 import axios from 'axios';
 
 //We use a class based component to create the form allowing users to create articles.
@@ -78,7 +76,6 @@ export default class Create extends React.Component {
           console.log('Error', error.message);
         }
         console.log(error.config);
-        
       });   
   }
 
