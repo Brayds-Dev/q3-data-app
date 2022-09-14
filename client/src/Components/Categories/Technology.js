@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios';
+import NavBar from '../NavBar';
 
 function Technology() {
 
@@ -13,7 +14,8 @@ function Technology() {
       }, []);
 
   return (
-    
+    <>
+    <NavBar />
     <div>
         <h1>Technology page...</h1>
 
@@ -25,6 +27,7 @@ function Technology() {
         )
 })}
     </div>
+    </>
   )
 }
 

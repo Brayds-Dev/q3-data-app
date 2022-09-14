@@ -1,3 +1,4 @@
+
 nav {
     list-style-type: none;
     margin: 0;
@@ -42,3 +43,31 @@ h4 link:hover:not(.active) {
 .active {
     background-color: #5bf7bd;
 }
+
+/*.navbar {
+    display: block;
+    justify-content: space-evenly;
+    align-content: space-between;
+    gap: 2rem;
+    width: 100%;
+} */
+
+li {
+    list-style: none;
+}
+
+.left {
+    display: flex;
+    float: left;
+}
+
+.right {
+    display: flex;
+    float: right;
+}
+
+a {
+    margin: 0 1rem;
+    text-decoration: none;
+}
+
