@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios';
 import NavBar from '../NavBar';
+import { Link } from 'react-router-dom';
 
 function Technology() {
 
@@ -22,7 +23,7 @@ function Technology() {
         {techArticleList.map((value, key)=> {
         return (
             <div key={key}>
-                <h3>{value.name}</h3>
+                <h3><Link to={{pathname: `${value._id}`}}>{value.name}</Link></h3>
             </div>
         )
 })}

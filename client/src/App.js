@@ -15,20 +15,26 @@ import ArticleDetail from './Components/ArticleDetail';
 
 function App() {
 
-
   return (
     <div className="App">
       <Router >
         <NavBar  />
         <Routes>
+
+          {/* These are the basic component routes*/}
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/create' element={<Create />} />
           <Route path='/arts' element={<Arts />} />
           <Route path='/mathematics' element={<Mathematics />} />
           <Route path='/technology' element={<Technology />} />
-          
+
+          {/* These route to article detail depending on which component you click on them from. */}
           <Route path='/:articleID' element={<ArticleDetail />} />
+          <Route path='/arts/:articleID' element={<ArticleDetail />} />
+          <Route path='/mathematics/:articleID' element={<ArticleDetail />} />
+          <Route path='/technology/:articleID' element={<ArticleDetail />} />
+
         </Routes>
       </Router>
     </div>

@@ -3,9 +3,6 @@ import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 import {Link, useParams,} from 'react-router-dom'
 
-
-//how to iterate each field and display them nicely?
-
 function ArticleDetail(props)  {
   //useParams allows the component to see the URL parameter passed through the route -
   //This is the ID of the article we want to get via Axios.
@@ -14,25 +11,51 @@ function ArticleDetail(props)  {
   //useState hooks is to set the article object we get back from axios.
   const [article, setArticle] = useState([]);
 
+  const showArticleFields = (article) => {
+      return(
+        <div>
+          <h1>Article Details: </h1>
+          <button>Update Article</button>
+          {/* 👇️ iterate object KEYS */}
+          {Object.keys(article).map((key, index) => {
+            //Returns everything except the id and an odd field sometimes present called __v
+            if(!(key === "_id" || key === "__v")){
+              if(!(key === "about")){
+                return (
+                  <div key={index}>
+                    <h5>
+                      {key.toUpperCase()}: {article[key]}
+                    </h5>
+                  </div>
+                );
+              }
+              //Formats only the "About" section with a <p> tag
+              else{
+                return (
+                  <div key={index}>
+                    <p>
+                      {key.toUpperCase()}: {article[key]}
+                    </p>
+                  </div>
+                );
+              }
+           }   
+      })}
+        </div>
+      )
+  }
+
   //this webhook performs this function immediately upon loading.
   useEffect(()=> {
     //Ask Axios politely to get just the article with this ID number.
     Axios.get(`http://localhost:3001/read/${articleID}`).then((response)=> {
       //assign the result to the the article variable
-      //have checked and this IS getting a response
       setArticle(response.data);
-      //Should probably have some try-catch thingy going on here.
     });
   }, []);
 
     return (
-      <div>
-        <h1>Article Details:</h1>
-        <h2>{article.category}</h2>
-        <h2>{article.name}</h2>
-        <h2>{article.type}</h2>
-        <p>{article.about}</p>
-      </div>
+      showArticleFields(article)
     );
   }
 export default ArticleDetail
