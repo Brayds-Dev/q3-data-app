@@ -82,104 +82,106 @@ export default class Create extends React.Component {
   //Render deals with displaying the form to the user.
   render() {
     return (
-      //Links the form submission to the above handle.
-      <form onSubmit={this.handleSubmit}>
-        
-        <label>
-          Category: 
-          <input type="text" 
-                 placeholder='i.e Art'
-                 value={this.state.category} 
-                 onChange={this.handleChange}
-                 name="category" />
-        </label>
-        <br></br>
+      <div>
+        <h1>Create New Article</h1>
+        {/*Links the form submission to the above handle.*/}
+        <form onSubmit={this.handleSubmit}> 
+          <label>
+            Category: 
+            <input type="text" 
+                  placeholder='i.e Art'
+                  value={this.state.category} 
+                  onChange={this.handleChange}
+                  name="category" />
+          </label>
+          <br></br>
 
-        <label>
-          Type:
-          <input type="text" 
-                 placeholder='i.e Biography'
-                 value={this.state.type} 
-                 onChange={this.handleChange}
-                 name="type" />
-        </label>
-        <br></br>
+          <label>
+            Type:
+            <input type="text" 
+                  placeholder='i.e Biography'
+                  value={this.state.type} 
+                  onChange={this.handleChange}
+                  name="type" />
+          </label>
+          <br></br>
 
-        <label>
-          Name:
-          <input type="text" 
-                 placeholder='i.e Da Vinci'
-                 value={this.state.name} 
-                 onChange={this.handleChange}
-                 name="name" />
-        </label>
-        <br></br>
-        
-        <label>
-          Born:
-          <input type="text" 
-                 placeholder='i.e 1950'
-                 value={this.state.born} 
-                 onChange={this.handleChange}
-                 name="born" />
-        </label>
-        <br></br>
-        
-        <label>
-          Died:
-          <input type="text" 
-                 placeholder='i.e 2010'
-                 value={this.state.died} 
-                 onChange={this.handleChange}
-                 name="died" />
-        </label>
-        <br></br>
-        
-        <label>
-          Nationality:
-          <input type="text"
-                 placeholder='i.e Italian'
-                 value={this.state.nationality} 
-                 onChange={this.handleChange}
-                 name="nationality" />
-        </label>
-        <br></br>
-        
-        <label>
-          Known for:
-          <input type="text"
-                 placeholder='i.e areas of expertise'
-                 value={this.state.knownFor} 
-                 onChange={this.handleChange}
-                 name="knownFor" />
-        </label>
-        <br></br>
-        
-        <label>
-          Notable work:
-          <input type="text" 
-                 placeholder='i.e the Mona Lisa'
-                 value={this.state.notableWork} 
-                 onChange={this.handleChange}
-                 name="notableWork" />
-        </label>
-        <br></br>
-        
-        <label>
-          About:
-          <textarea 
-                 rows="5"
-                 cols="100"
-                 type="text" 
-                 placeholder='Body of the article goes here...'
-                 value={this.state.about} 
-                 onChange={this.handleChange}
-                 name="about" />
-        </label>
-        <br></br>
+          <label>
+            Name:
+            <input type="text" 
+                  placeholder='i.e Da Vinci'
+                  value={this.state.name} 
+                  onChange={this.handleChange}
+                  name="name" />
+          </label>
+          <br></br>
+          
+          <label>
+            Born:
+            <input type="text" 
+                  placeholder='i.e 1950'
+                  value={this.state.born} 
+                  onChange={this.handleChange}
+                  name="born" />
+          </label>
+          <br></br>
+          
+          <label>
+            Died:
+            <input type="text" 
+                  placeholder='i.e 2010'
+                  value={this.state.died} 
+                  onChange={this.handleChange}
+                  name="died" />
+          </label>
+          <br></br>
+          
+          <label>
+            Nationality:
+            <input type="text"
+                  placeholder='i.e Italian'
+                  value={this.state.nationality} 
+                  onChange={this.handleChange}
+                  name="nationality" />
+          </label>
+          <br></br>
+          
+          <label>
+            Known for:
+            <input type="text"
+                  placeholder='i.e areas of expertise'
+                  value={this.state.knownFor} 
+                  onChange={this.handleChange}
+                  name="knownFor" />
+          </label>
+          <br></br>
+          
+          <label>
+            Notable work:
+            <input type="text" 
+                  placeholder='i.e the Mona Lisa'
+                  value={this.state.notableWork} 
+                  onChange={this.handleChange}
+                  name="notableWork" />
+          </label>
+          <br></br>
+          
+          <label>
+            About:
+            <textarea 
+                  rows="5"
+                  cols="100"
+                  type="text" 
+                  placeholder='Body of the article goes here...'
+                  value={this.state.about} 
+                  onChange={this.handleChange}
+                  name="about" />
+          </label>
+          <br></br>
 
-        <input type="submit" value="Submit" />
-      </form>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
     );
   }
 }
