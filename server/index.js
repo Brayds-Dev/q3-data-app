@@ -33,7 +33,7 @@ app.get('/read/arts', async (req, res) => {
     });
 });
 
-// API to retrieve all documents with the category type 'Methematics'
+// API to retrieve all documents with the category type 'Mathematics'
 app.get('/read/mathematics', async (req, res) => {
     ArticleModel.find({category: 'Mathematics'}, (error, result) => {
         if (error){
@@ -52,6 +52,17 @@ app.get('/read/technology', async (req, res) => {
         res.send(result);
     });
 });
+
+//API to get an article by ID
+app.get('/read/:id', async (req, res) => {
+    ArticleModel.findById(req.params.id, (error, result) => {
+        if (error){
+            return res.send(error);
+        }
+        return res.send(result);
+        });
+});
+
 
 // API to create a new db entry or POST
 app.post('/create', async (req, res) => {
