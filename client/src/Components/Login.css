@@ -13,6 +13,8 @@ form label {
 
 form field {
     display:block;
+    background-color: rgb(101, 101, 101);
+    padding: 10px;
 }
 
 label input { 
