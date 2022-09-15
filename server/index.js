@@ -1,3 +1,11 @@
+/**
+ * Date: September 2022
+ * Team: Wise Wellingtonians - Whitecliffe IT6037 Group Project
+ * 
+ * Main server file that deals with connecting to the Mongo database and all the API calls that axios uses
+ * for CRUD operations.
+ */
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -8,6 +16,7 @@ app.use(cors());
 
 const ArticleModel = require("./models/Article.js");
 
+//Connection string to get into the mongo database.
 mongoose.connect(
   "mongodb+srv://bdaw211:ZmAKUg7kKKEVltlC@teamproject.o3vp87l.mongodb.net/schooldb?retryWrites=true&w=majority",
   {
@@ -35,8 +44,7 @@ app.get("/read/arts", async (req, res) => {
   });
 });
 
-
-// API to retrieve all documents with the category type 'Methematics'
+// API to retrieve all documents with the category type 'Mathematics'
 app.get("/read/mathematics", async (req, res) => {
   ArticleModel.find({ category: "Mathematics" }, (error, result) => {
     if (error) {
@@ -67,8 +75,7 @@ app.get('/read/:id', async (req, res) => {
         });
 });
 
-
-// API to create a new db entry or POST
+// API to create a new article (POST)
 app.post("/create", async (req, res) => {
   //gets the data from the front end form
   const category = req.body.category;
@@ -104,9 +111,10 @@ app.post("/create", async (req, res) => {
   }
 });
 
-//API call to update a single article NB - ONLY DOES NAME FIELD FOR TESTING
+//API call to update a single article
 app.put("/update/:id", async (req, res) => {
   const id = req.params.id;
+  //all fields can be updated
   const newArticleCategory = req.body.category;
   const newArticleType = req.body.type;
   const newArticleName = req.body.name;
@@ -128,7 +136,7 @@ app.put("/update/:id", async (req, res) => {
       updatedArticle.knownFor = newArticleKnownFor;
       updatedArticle.notableWork= newArticleNotableWork;
       updatedArticle.about = newArticleAbout;
-
+      //save the changes.
       updatedArticle.save();
       res.send("updated");
     });
@@ -138,10 +146,10 @@ app.put("/update/:id", async (req, res) => {
   }
 });
 
-
+//API call to delete a single article
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
-
+  //given the id of the article, remove it from DB.
   await ArticleModel.findByIdAndRemove(id).exec();
   res.send("deleted");
 });

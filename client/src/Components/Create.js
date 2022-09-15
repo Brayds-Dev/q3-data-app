@@ -1,3 +1,13 @@
+/**
+ * Date: September 2022
+ * Team: Wise Wellingtonians - Whitecliffe IT6037 Group Project
+ * 
+ * This is the component for creating a new article. Users access it from the 'Create'
+ * button on the nav bar. It is a class based component that uses the 'state' property
+ * to take all the values in the form and pass them to axios to create a new article.
+ * All possible fields have to be hard coded in.
+ */
+
 import React from 'react';
 import axios from 'axios';
 

@@ -1,8 +1,19 @@
+/**
+ * Date: September 2022
+ * Team: Wise Wellingtonians - Whitecliffe IT6037 Group Project
+ * 
+ * This file is responsible for all the routing and navigation within the 
+ * application. It imports all the other used components and defines their
+ * paths.
+ */
 
+//Libraries needed from react to deal with navigation
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
+//Import styling
 import './App.css';
 
+//Import all pathed components.
 import NavBar from './Components/NavBar';
 import Home from './Components/Home';
 import Login from './Components/Login';
@@ -13,12 +24,13 @@ import Technology from './Components/Categories/Technology';
 import Update from './Components/Update.js';
 import ArticleDetail from './Components/ArticleDetail';
 
+//Functional component
 function App() {
 
   return (
     <div className="App">
       <Router >
-        <NavBar  />
+        <NavBar  /> {/**Just renders the navbar component. */}
         <Routes>
 
           {/* These are the basic component routes*/}
@@ -28,8 +40,6 @@ function App() {
           <Route path='/arts' element={<Arts />} />
           <Route path='/mathematics' element={<Mathematics />} />
           <Route path='/technology' element={<Technology />} />
-          
-          <Route path='/update/:articleID' element={<Update />} />
 
           {/* These route to article detail depending on which component you click on them from. */}
           <Route path='/:articleID' element={<ArticleDetail />} />
@@ -37,10 +47,12 @@ function App() {
           <Route path='/mathematics/:articleID' element={<ArticleDetail />} />
           <Route path='/technology/:articleID' element={<ArticleDetail />} />
 
+          {/** Route specifically to updating an article*/}
+          <Route path='/update/:articleID' element={<Update />} />
+
         </Routes>
       </Router>
     </div>
   );
 }
-
 export default App;
