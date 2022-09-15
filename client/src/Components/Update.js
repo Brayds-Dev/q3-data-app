@@ -28,12 +28,19 @@ function Update() {
       {
         //send all article object fields.
         category : article.category,
-        type : article.type
+        type : article.type,
+        name : article.name,
+        born : article.born,
+        died : article.died,
+        nationality : article.nationality,
+        knownFor : article.knownFor,
+        notableWork : article.notableWork,
+        about : article.about
       })
       .then(function (response) 
       {
         console.log(response);
-        alert('Article created'); //pop up
+        alert('Article Updated'); //pop up
         document.location.href="/"; //return home
       })
     }
@@ -54,21 +61,85 @@ function Update() {
               {"New category: "} 
               <input type="text" 
               placeholder={article.category}
-              //onchange updates the article category
               onChange={e => {article.category = e.target.value;}}
               />
             </label>
             <br></br>
 
-              <label>
+            <label>
               {"New Type: "} 
               <input type="text" 
               placeholder={article.type}
-              //onchange updates the article type
               onChange={e => {article.type = e.target.value;}}
               />
             </label>
-            <br></br> 
+            <br></br>
+
+            <label>
+              {"New Name: "} 
+              <input type="text" 
+              placeholder={article.name}
+              onChange={e => {article.name = e.target.value;}}
+              />
+            </label>
+            <br></br>
+
+            <label>
+              {"New Birth Date: "} 
+              <input type="text" 
+              placeholder={article.born}
+              onChange={e => {article.born = e.target.value;}}
+              />
+            </label>
+            <br></br>
+
+            <label>
+              {"New Death Date: "} 
+              <input type="text" 
+              placeholder={article.died}
+              onChange={e => {article.died = e.target.value;}}
+              />
+            </label>
+            <br></br>
+
+            <label>
+              {"New Nationality: "} 
+              <input type="text" 
+              placeholder={article.nationality}
+              onChange={e => {article.nationality = e.target.value;}}
+              />
+            </label>
+            <br></br>
+
+            <label>
+              {"New Known For: "} 
+              <input type="text" 
+              placeholder={article.knownFor}
+              onChange={e => {article.knownFor = e.target.value;}}
+              />
+            </label>
+            <br></br>
+
+            <label>
+              {"New Notable Work: "} 
+              <input type="text" 
+              placeholder={article.notableWork}
+              onChange={e => {article.notableWork = e.target.value;}}
+              />
+            </label>
+            <br></br>
+
+            <label>
+              {"New About: "} 
+              <textarea 
+                  rows="5"
+                  cols="100"
+                  type="text" 
+                  placeholder={article.about}
+                  onChange={e => {article.about = e.target.value;}}
+                  name="about" />
+            </label>
+            <br></br>
 
         <input type="submit" value="Submit" />
       </form>

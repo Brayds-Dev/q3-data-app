@@ -109,12 +109,26 @@ app.put("/update/:id", async (req, res) => {
   const id = req.params.id;
   const newArticleCategory = req.body.category;
   const newArticleType = req.body.type;
-  //const newArticleName = req.body.name;
+  const newArticleName = req.body.name;
+  const newArticleBorn = req.body.born;
+  const newArticleDied = req.body.died;
+  const newArticleNationality = req.body.nationality;
+  const newArticleKnownFor = req.body.knownFor;
+  const newArticleNotableWork = req.body.notableWork;
+  const newArticleAbout = req.body.about;
+  
   try{
     await ArticleModel.findById(id, (err, updatedArticle) => {
       updatedArticle.category = newArticleCategory;
       updatedArticle.type = newArticleType;
-      //updatedArticle.name = newArticleName;
+      updatedArticle.name = newArticleName;
+      updatedArticle.born = newArticleBorn;
+      updatedArticle.died = newArticleDied;
+      updatedArticle.nationality = newArticleNationality;
+      updatedArticle.knownFor = newArticleKnownFor;
+      updatedArticle.notableWork= newArticleNotableWork;
+      updatedArticle.about = newArticleAbout;
+
       updatedArticle.save();
       res.send("updated");
     });
