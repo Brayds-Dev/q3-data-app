@@ -15,7 +15,8 @@ function ArticleDetail(props)  {
       return(
         <div>
           <h1>Article Details: </h1>
-          <button>Update Article</button>
+          {/* Links to a page that updates the current article, passing the article obj as a property. */}
+          <button><Link to={{pathname: `/update/${article._id}`}}>Update Article</Link></button>
           {/* 👇️ iterate object KEYS */}
           {Object.keys(article).map((key, index) => {
             //Returns everything except the id and an odd field sometimes present called __v

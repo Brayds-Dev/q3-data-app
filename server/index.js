@@ -104,6 +104,27 @@ app.post("/create", async (req, res) => {
   }
 });
 
+//API call to update a single article NB - ONLY DOES NAME FIELD FOR TESTING
+app.put("/update/:id", async (req, res) => {
+  const id = req.params.id;
+  const newArticleCategory = req.body.category;
+  const newArticleType = req.body.type;
+  //const newArticleName = req.body.name;
+  try{
+    await ArticleModel.findById(id, (err, updatedArticle) => {
+      updatedArticle.category = newArticleCategory;
+      updatedArticle.type = newArticleType;
+      //updatedArticle.name = newArticleName;
+      updatedArticle.save();
+      res.send("updated");
+    });
+  }
+  catch(err){
+    console.log(err)
+  }
+});
+
+
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
 
