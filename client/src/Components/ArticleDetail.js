@@ -60,6 +60,14 @@ function ArticleDetail(props)  {
     )
   }
 
+  //Function for deleting an article based on article id.
+  const deleteArticle = (id) => {
+    //Make a delete request via axios
+    Axios.delete(`http://localhost:3001/delete/${id}`);
+    alert('Article Deleted')
+    document.location.href="/";
+  };
+
   //this webhook performs this function immediately upon loading.
   useEffect(()=> {
     //Ask Axios politely to get just the article with this ID number.
@@ -74,7 +82,9 @@ function ArticleDetail(props)  {
     <div>
       <h1>Article Details: </h1>
       {/* Links to a page that updates the current article, passing the article obj as a property. */}
-      <button><Link to={{pathname: `/update/${article._id}`}}>Update Article</Link></button>
+      <button><Link to={{pathname: `/update/${articleID}`}}>Update Article</Link></button>
+      {/**Button that deletes the article when clicked */}
+      <button onClick={() => deleteArticle(articleID)}>Delete</button>
       {/**Calls the method that shows all article details. */}
       {showArticleFields(article)}
     </div>

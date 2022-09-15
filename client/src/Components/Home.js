@@ -27,13 +27,6 @@ function Home() {
       setArticleList(response.data);
     });
   }, []);
-  
-  //Function for deleting an article based on article id.
-  const deleteArticle = (id) => {
-    //Make a delete request via axios
-    Axios.delete(`http://localhost:3001/delete/${id}`);
-    window.location.reload(); // reload the page immediately (saves manual refresh)
-  };
 
   //The return section decides what is displayed to the browser.
   return (
@@ -52,8 +45,6 @@ function Home() {
           <div key={key}>
             {/*Turns the names into links to the respective article detaiil pages using the _id field as URL*/}
             <h3><Link to={{pathname: `${value._id}`}}>{value.name}</Link></h3>
-            {/**Button that deletes the article when clicked */}
-            <button onClick={() => deleteArticle(value._id)}>Delete</button>
           </div>
         )
       })}
