@@ -13,6 +13,8 @@ import Technology from './Components/Categories/Technology';
 
 import ArticleDetail from './Components/ArticleDetail';
 
+import Register from './Components/Register';
+
 function App() {
 
 
@@ -29,6 +31,8 @@ function App() {
           <Route path='/technology' element={<Technology />} />
           
           <Route path='/:articleID' element={<ArticleDetail />} />
+
+          <Route path='/register' element={<Register />} />
         </Routes>
       </Router>
     </div>

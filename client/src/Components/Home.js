@@ -11,12 +11,21 @@ function Home() {
     const [articleList, setArticleList] = useState([]);
     const [textSearch, setTextSearch] = useState('');
 
+    // Atempt to set token from local storage to header and add to request
+    // const token = localStorage.getItem('token');
+    // const headers = { Authorization: `Bearer ${token}`};
+
     //console.log(textSearch);
 
     //Using Axios send an http request to one of our custom routes created in the server index.js file
     useEffect(()=> {
-        Axios.get("http://localhost:3001/read").then((response)=> {
+        Axios.get("http://localhost:3001/read", ).then((response)=> {
           setArticleList(response.data);
+          
+        })
+        .catch((error)=>{
+          console.log(error);
+          alert("Not authenticated")
         });
       }, []);
       
