@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Axios from 'axios'
+import axios from 'axios'
 
 function Register() {
     // Functions
@@ -9,16 +9,18 @@ function Register() {
     const [password, setPassword] = useState('');
 
     // Axios request
-    const addUser = () => {
-        Axios.post("http://localhost:3001/register", {
-            first_name: firstName,
-            last_name: lastName,
-            email: email,
-            password: password
+    //const addUser = () => {
+    function addUser() {
+        axios.post("http://localhost:3001/register", 
+        {
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          password: password
         })
         //what it does with successfull POST
-        .then((response) => {
-            console.log(response)
+        .then(function (response) {
+            console.log(response);
             console.log("user created successfully");
             alert('User created');
             document.location.href="/login";

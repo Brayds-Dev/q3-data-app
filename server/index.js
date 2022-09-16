@@ -130,7 +130,7 @@ app.post("/register", async (req, res) => {
       if (!(email && password && first_name && last_name)) {
           res.status(400).send("All input is required");
       }
-
+      console.log("passed validation...");
       // check if user already exist
       // Validate if user exist in our database
       const oldUser = await UserModel.findOne({ email });
@@ -138,7 +138,7 @@ app.post("/register", async (req, res) => {
       if (oldUser) {
           return res.status(409).send("User Already Exist. Please Login");
       }
-
+      console.log("registration attempt unique...");
       //Encrypt user password
       encryptedPassword = await bcrypt.hash(password, 10);
 
@@ -149,7 +149,7 @@ app.post("/register", async (req, res) => {
           email: email.toLowerCase(), // sanitize: convert email to lowercase
           password: encryptedPassword,
       });
-
+      console.log("user created")
       // Create token
       // const token = jwt.sign(
       //     { user_id: user._id, email },
@@ -165,7 +165,7 @@ app.post("/register", async (req, res) => {
       return res.status(201).json(user);
       // res.send('User added successfully');
   } catch (error) {
-      console.log(error);
+      console.log("Error in user creation: "+error);
   }
 });
 
@@ -184,6 +184,7 @@ app.post("/login", async (req, res) => {
       //validate if user exist in our database
       const user = await UserModel.findOne({email});
 
+      //could be hanging here??
       if(user && ( await bcrypt.compare(password, user.password))){
           
           // Create token
