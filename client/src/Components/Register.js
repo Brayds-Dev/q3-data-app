@@ -20,7 +20,7 @@ function Register() {
         .then((response) => {
             console.log(response)
             console.log("user created successfully");
-            alert('User created')
+            alert('User created');
             document.location.href="/login";
         })
         .catch((error) => {
