@@ -1,18 +1,27 @@
+/**
+ * Date: September 2022
+ * Team: Wise Wellingtonians - Whitecliffe IT6037 Group Project
+ * 
+ * This is the nav bar component.  Levereages the 'Link' library
+ * from react to call different components.
+ */
+
 import React from 'react';
 import {Link} from 'react-router-dom';
-
 import './NavBar.css';
 
 function NavBar() {
   return (
-    <div class="navbar">
+    <div className="navbar">
       <nav>
-        <ul class="left">
+        {/**All components aligned to the left of the screen */}
+        <ul className="left">
           <li><Link to='/login'>Logout</Link></li>
           <li><Link to='/'>Home</Link></li>
         </ul>
-          
-        <ul class="right">
+
+        {/**All components aligned to the right of the screen */}  
+        <ul className="right">
           <li><Link to='/arts'>Arts</Link></li>
           <li><Link to='/mathematics'>Mathematics</Link></li>
           <li><Link to='/technology'>Technology</Link></li>

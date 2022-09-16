@@ -1,21 +1,18 @@
-//import React, {useState, useEffect} from 'react'
+/**
+ * Date: September 2022
+ * Team: Wise Wellingtonians - Whitecliffe IT6037 Group Project
+ * 
+ * This is the article details component. It is a function that uses a webhook to get
+ * the article id from the URL parameter, then pass that id to axios to get the 
+ * correct article from the database.
+ * With the article object, it iterates over all the fields of the article as key:value pairs,
+ * for example 'Category: Mathematics' and displays them to the browser
+ * This avoids hard coding all possible fields some of which will not have data to display.
+ */
+
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 import {Link, useParams,} from 'react-router-dom'
-
-//first - test getting the id from the parent component into a prop here.
-//now working
-
-//second, make sure its formatted correctly
-//formatting correct - had to get read of that sneaky '}'
-
-//check axios is returning data to me 
-//yea that bits working too
-
-//so the data returned is an object - how to view all the fields?
-//article.<fieldname>. Duh
-
-//how to iterate each field and display them nicely?
 
 function ArticleDetail(props)  {
   //useParams allows the component to see the URL parameter passed through the route -
@@ -25,25 +22,73 @@ function ArticleDetail(props)  {
   //useState hooks is to set the article object we get back from axios.
   const [article, setArticle] = useState([]);
 
+  //Define functionality for component.
+  const showArticleFields = (article) => {
+    return(
+      <div>
+        {/*Iterate object KEYS */}
+        {Object.keys(article).map((key, index) => {
+          //Returns everything except the id and a version field sometimes present called __v
+          if(!(key === "_id" || key === "__v")){
+            //Formats all sections with an h5 tag
+            if(!(key === "about")){
+              return (
+                <div key={index}>
+                  <h5>
+                    {key.toUpperCase()}: {article[key]}
+                  </h5>
+                </div>
+              );
+            }
+            //Formats only the "About" section with a <p> tag
+            else{
+              return (
+                <div key={index}>
+                  <p>
+                    {key.toUpperCase()}: {article[key]}
+                  </p>
+                </div>
+              );
+            }
+          }
+          //Added to make sure something is returned in all cases.
+          else{ 
+            return null
+          }   
+        })}
+      </div>
+    )
+  }
+
+  //Function for deleting an article based on article id.
+  const deleteArticle = (id) => {
+    //Make a delete request via axios
+    Axios.delete(`http://localhost:3001/delete/${id}`);
+    alert('Article Deleted')
+    document.location.href="/";
+  };
+
   //this webhook performs this function immediately upon loading.
   useEffect(()=> {
     //Ask Axios politely to get just the article with this ID number.
     Axios.get(`http://localhost:3001/read/${articleID}`).then((response)=> {
       //assign the result to the the article variable
-      //have checked and this IS getting a response
       setArticle(response.data);
-      //Should probably have some try-catch thingy going on here.
     });
-  }, []);
+  });
 
-    return (
-      <div>
-        <h1>Article Details:</h1>
-        <h2>{article.category}</h2>
-        <h2>{article.name}</h2>
-        <h2>{article.type}</h2>
-        <p>{article.about}</p>
-      </div>
-    );
-  }
+  //Defines what the component renders to the page.
+  return (
+    <div>
+      <h1>Article Details: </h1>
+      {/* Links to a page that updates the current article, passing the article obj as a property. */}
+      <button><Link to={{pathname: `/update/${articleID}`}}>Update Article</Link></button>
+      {/**Button that deletes the article when clicked */}
+      <button onClick={() => deleteArticle(articleID)}>Delete</button>
+      {/**Calls the method that shows all article details. */}
+      {showArticleFields(article)}
+    </div>
+  );
+}
+
 export default ArticleDetail
