@@ -1,15 +1,20 @@
     body {
-        background-color: rgb(49, 48, 48);
+        background: #fff url('bg.jpg') center bottom no-repeat;
+        background-attachment: fixed;
+        
+        /*background-color: rgb(49, 48, 48);
         background-image: url("bg.jpg");
         background-repeat: no-repeat, repeat;
-        background-size: cover; /* Resize the background image to cover the entire container */
-        height: 650px;
+        /*background-size: cover; /* Resize the background image to cover the entire container */
+        /*height: 650px;*/
     } 
        
     form {
         border: rgb(220, 85, 85) thin solid;
         padding: 2rem;
+        background: #fff;
     }
+
     
     form label {
         display: flex;
@@ -29,20 +34,19 @@
         background-color: rgb(94, 92, 92);
         color: rgb(248, 238, 238);
         font-family: 'calibri';
+        border: 3px solid black;
     }
       
     div {
         /* color: white; */
         margin-top: 32px;
+        
     }
 
     h3 {
         color: black;
-        text-decoration-line: overline underline;
-        text-decoration-thickness: 1px;
-        text-decoration-color: rgb(169, 170, 170);
         font-family: 'calibri light', 'Gill Sans MT', 'Trebuchet MS', sans-serif, Helvetica, sans-serif;
-        
+        border: 2px solid rgb(109, 109, 109);
     }
 
     

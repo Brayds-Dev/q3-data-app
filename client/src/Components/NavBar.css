@@ -45,22 +45,25 @@ h4 link:hover:not(.active) {
 }
 
 .navbar {
-    display: block;
+   /* display: block;*/
     justify-content: space-evenly;
     align-content: space-between;
     gap: 2rem;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 li {
     list-style: none;
-    color: antiquewhite;
+    color: white;
     text-decoration: none;
+    
 }
 
 li a {
-    color: antiquewhite;
+    color: white;
     text-decoration: none;
+    text-decoration: underline solid rgb(22, 26, 168);
+    font-size: medium;
 }
 
 .left {
@@ -71,6 +74,7 @@ li a {
 .right {
     display: flex;
     float: right;
+    padding-right: 3rem; /* padding was accurate originally*/
 }
 
 a {

@@ -1,13 +1,22 @@
-import React, {useState, useEffect} from 'react'
+/**
+ * Date: September 2022
+ * Team: Wise Wellingtonians - Whitecliffe IT6037 Group Project
+ * 
+ * This is the home page. The landing page for the application from which all 
+ * functionality is based. Use the navigation bar to filter articles by category,
+ * create a new article and log in or out. Use the search bar to look for a 
+ * specific article by name.
+ */
 
+import React, {useState, useEffect} from 'react'
+import {Link,} from 'react-router-dom';
 import Axios from 'axios';
 import './Home.css';
 
-import {Link,} from 'react-router-dom';
-
-
+//The function based component holding all logic.
 function Home() {
     
+
     const [articleList, setArticleList] = useState([]);
     const [textSearch, setTextSearch] = useState('');
 
@@ -29,32 +38,29 @@ function Home() {
         });
       }, []);
       
-    const deleteArticle = (id) => {
-    Axios.delete(`http://localhost:3001/delete/${id}`);
-    window.location.reload();
-    };
 
+  //The return section decides what is displayed to the browser.
   return (
-      
-      <div>
-        <h1>Article List</h1>
-
-        <input type="search" 
-               name='searchTerm' 
-               placeholder='title keyword....' 
-               onChange={(event)=>{
+    <div> 
+      <h1>Article List</h1>
+      {/**The search bar */}
+      <input type="search" 
+              name='searchTerm' 
+              placeholder='search by title...' 
+              onChange={(event)=>{
                 setTextSearch(event.target.value)}} />
-        
-        {articleList.filter(({name})=>name.toLowerCase().includes(textSearch.toLowerCase())).map((value, key) => {
-            return (
-                <div key={key}>
-                    <h3><Link to={{pathname: `${value._id}`}}>{value.name}</Link></h3>
-                    <button onClick={() => deleteArticle(value._id)}>Delete</button>
-                </div>
-            )
-        })}
+
+      {/**Filters the articles by matching lowercase searchterm against lowercase article name. */}
+      {articleList.filter(({name})=>name.toLowerCase().includes(textSearch.toLowerCase())).map((value, key) => {
+        return (
+          <div key={key}>
+            {/*Turns the names into links to the respective article detaiil pages using the _id field as URL*/}
+            <h3><Link to={{pathname: `${value._id}`}}>{value.name}</Link></h3>
+          </div>
+        )
+      })}
+
     </div>
   );
 }
-
 export default Home;
