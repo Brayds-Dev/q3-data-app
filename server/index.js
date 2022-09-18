@@ -9,13 +9,21 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+
 require("dotenv").config({path: "./environment/.env"});
+
 const app = express();
+
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const auth = require("./middleware/auth");
 
 app.use(express.json());
 app.use(cors());
 
+
 const ArticleModel = require("./models/Article.js");
+const UserModel = require("./models/User");
 
 //Assign our chosen port address from our .env file to a new variable
 const { API_PORT } = process.env;
@@ -162,6 +170,100 @@ app.delete("/delete/:id", async (req, res) => {
   //given the id of the article, remove it from DB.
   await ArticleModel.findByIdAndRemove(id).exec();
   res.send("deleted");
+});
+
+// User API's
+
+// Register
+app.post("/register", async (req, res) => {
+  try {
+      // Get user input
+      const { first_name, last_name, email, password } = req.body;
+      console.log(password);
+      // Validate user input
+      if (!(email && password && first_name && last_name)) {
+          res.status(400).send("All input is required");
+      }
+      console.log("passed validation...");
+      // check if user already exist
+      // Validate if user exist in our database
+      const oldUser = await UserModel.findOne({ email });
+
+      if (oldUser) {
+          return res.status(409).send("User Already Exist. Please Login");
+      }
+      console.log("registration attempt unique...");
+      //Encrypt user password
+      encryptedPassword = await bcrypt.hash(password, 10);
+
+      // Create user in our database
+      const user = await UserModel.create({
+          first_name,
+          last_name,
+          email: email.toLowerCase(), // sanitize: convert email to lowercase
+          password: encryptedPassword,
+      });
+      console.log("user created")
+      // Create token
+      // const token = jwt.sign(
+      //     { user_id: user._id, email },
+      //     process.env.TOKEN_KEY,
+      //     {
+      //     expiresIn: "2h",
+      //     }
+      // );
+      // // save user token
+      // user.token = token;
+
+      // return new user
+      return res.status(201).json(user);
+      // res.send('User added successfully');
+  } catch (error) {
+      console.log("Error in user creation: "+error);
+  }
+});
+
+// Login
+
+app.post("/login", async (req, res) => {
+  // our login logic goes here
+  try {
+      const {email, password} = req.body;
+
+      //validate user input
+      if(!(email && password)){
+          res.status(400).send("All input is required");
+      }
+
+      //validate if user exist in our database
+      const user = await UserModel.findOne({email});
+
+      //could be hanging here??
+      if(user && ( await bcrypt.compare(password, user.password))){
+          
+          // Create token
+          const token = jwt.sign(
+              {user_id: user._id, email},
+              process.env.TOKEN_KEY,
+              {
+                  expiresIn: "2h",
+              }
+          );
+          
+          // save user token
+          user.token = token;
+          
+          //user
+          return res.status(200).json(user);
+          // res.status(200).send(user);
+          // res.status(200).send("logged in successfully");
+      }
+
+      res.status(400).send("Invalid Credentials");
+
+  } catch (error) {
+      console.log(error);
+  }
 });
 
 // Set port from local host to run backend server on

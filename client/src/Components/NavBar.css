@@ -54,13 +54,16 @@ h4 link:hover:not(.active) {
 
 li {
     list-style: none;
-    color: antiquewhite;
+    color: white;
     text-decoration: none;
+    
 }
 
 li a {
-    color: antiquewhite;
+    color: white;
     text-decoration: none;
+    text-decoration: underline solid rgb(22, 26, 168);
+    font-size: medium;
 }
 
 .left {
