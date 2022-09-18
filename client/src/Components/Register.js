@@ -10,7 +10,7 @@ function Register() {
 
     // Axios request
     //const addUser = () => {
-    function addUser() {
+    async function addUser() {
         axios.post("http://localhost:3001/register", 
         {
           first_name: firstName,
