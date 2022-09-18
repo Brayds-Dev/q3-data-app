@@ -16,17 +16,28 @@ import './Home.css';
 //The function based component holding all logic.
 function Home() {
     
-  //Define constants used by the search function,
-  const [articleList, setArticleList] = useState([]); //List of displayed articles.
-  const [textSearch, setTextSearch] = useState(''); //Input text in the search bar.
 
-  //On loading, use this webhook to send an axios request to the index.js file.
-  useEffect(()=> {
-    //Make a 'read' call that returns all the files in the database to the article list.
-    Axios.get("http://localhost:3001/read").then((response)=> {
-      setArticleList(response.data);
-    });
-  }, []);
+    const [articleList, setArticleList] = useState([]);
+    const [textSearch, setTextSearch] = useState('');
+
+    // Atempt to set token from local storage to header and add to request
+    // const token = localStorage.getItem('token');
+    // const headers = { Authorization: `Bearer ${token}`};
+
+    //console.log(textSearch);
+
+    //Using Axios send an http request to one of our custom routes created in the server index.js file
+    useEffect(()=> {
+        Axios.get("http://localhost:3001/read", ).then((response)=> {
+          setArticleList(response.data);
+          
+        })
+        .catch((error)=>{
+          console.log(error);
+          alert("Not authenticated")
+        });
+      }, []);
+      
 
   //The return section decides what is displayed to the browser.
   return (

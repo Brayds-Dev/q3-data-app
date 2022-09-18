@@ -23,10 +23,11 @@ import Mathematics from './Components/Categories/Mathematics';
 import Technology from './Components/Categories/Technology';
 import Update from './Components/Update.js';
 import ArticleDetail from './Components/ArticleDetail';
+import Register from './Components/Register';
 
 //Functional component
-function App() {
 
+function App() {
   return (
     <div className="App">
       <Router >
@@ -40,6 +41,7 @@ function App() {
           <Route path='/arts' element={<Arts />} />
           <Route path='/mathematics' element={<Mathematics />} />
           <Route path='/technology' element={<Technology />} />
+          <Route path='/register' element={<Register />} />
 
           {/* These route to article detail depending on which component you click on them from. */}
           <Route path='/:articleID' element={<ArticleDetail />} />
@@ -49,6 +51,7 @@ function App() {
 
           {/** Route specifically to updating an article*/}
           <Route path='/update/:articleID' element={<Update />} />
+
 
         </Routes>
       </Router>
