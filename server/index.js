@@ -9,7 +9,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config();
+
+require("dotenv").config({path: "./environment/.env"});
+
 const app = express();
 
 const bcrypt = require("bcryptjs");
@@ -23,9 +25,18 @@ app.use(cors());
 const ArticleModel = require("./models/Article.js");
 const UserModel = require("./models/User");
 
-//Connection string to get into the mongo database.
+//Assign our chosen port address from our .env file to a new variable
+const { API_PORT } = process.env;
+const port = API_PORT;
+
+//Assign a MongoDB connection string from our .env file to a new variable
+const { MONGO_URI } = process.env;
+const mongoString = MONGO_URI;
+
+
+//Connect to the MongoDB database using the connection string specified inside the .env file
 mongoose.connect(
-  "mongodb+srv://bdaw211:ZmAKUg7kKKEVltlC@teamproject.o3vp87l.mongodb.net/schooldb?retryWrites=true&w=majority",
+  mongoString,
   {
     useNewUrlParser: true,
   }
@@ -256,7 +267,7 @@ app.post("/login", async (req, res) => {
 });
 
 // Set port from local host to run backend server on
-app.listen(3001, () => {
+app.listen(port, () => {
   console.log("Server running on port 3001....");
   console.log("ctrl 'C' to stop the server");
 });
