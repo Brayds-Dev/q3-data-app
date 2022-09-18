@@ -1,15 +1,19 @@
     body {
-        background-color: rgb(49, 48, 48);
+        background: #fff url('bg.jpg') center bottom no-repeat;
+        background-attachment: fixed;
+        /*background-color: rgb(49, 48, 48);
         background-image: url("bg.jpg");
         background-repeat: no-repeat, repeat;
-        background-size: cover; /* Resize the background image to cover the entire container */
-        height: 650px;
+        /*background-size: cover; /* Resize the background image to cover the entire container */
+        /*height: 650px;*/
     } 
        
     form {
         border: rgb(220, 85, 85) thin solid;
         padding: 2rem;
+        background: #fff;
     }
+
     
     form label {
         display: flex;
