@@ -25,14 +25,19 @@ function Arts() {
   //What is rendered to browser.
   return (
     <div>
-        <h1>Arts page:</h1>
+        <h1>Arts page</h1>
         {/**Display each article by name */}
         {artsArticleList.map((value, key)=> {
           return (
             <div key={key}>
-              {/**Applies a link to the article name connecting to it's detail page. */}
-                <h3><Link to={{pathname: `${value._id}`}}>{value.name}</Link></h3>
+            {/*Turns the names into links to the respective article detaiil pages using the _id field as URL*/}
+            <div className='article-list'>
+              <Link to={{pathname: `${value._id}`}}>
+                <h3>{value.name}</h3>
+              </Link>
             </div>
+            
+          </div>
           )
         })}
     </div>

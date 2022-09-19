@@ -21,7 +21,7 @@ const auth = require("./middleware/auth");
 app.use(express.json());
 app.use(cors());
 
-
+//Import our custom mongoose models from the Models folder
 const ArticleModel = require("./models/Article.js");
 const UserModel = require("./models/User");
 

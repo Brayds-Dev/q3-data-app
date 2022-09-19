@@ -55,7 +55,12 @@ function Home() {
         return (
           <div key={key}>
             {/*Turns the names into links to the respective article detaiil pages using the _id field as URL*/}
-            <h3><Link to={{pathname: `${value._id}`}}>{value.name}</Link></h3>
+            <div className='article-list'>
+              <Link to={{pathname: `${value._id}`}}>
+                <h3>{value.name}</h3>
+              </Link>
+            </div>
+            
           </div>
         )
       })}

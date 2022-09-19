@@ -43,10 +43,18 @@
         
     }
 
+    .article-list {
+        margin-top: 0px;
+    }
+
     h3 {
         color: black;
         font-family: 'calibri light', 'Gill Sans MT', 'Trebuchet MS', sans-serif, Helvetica, sans-serif;
         border: 2px solid rgb(109, 109, 109);
+        border-radius: 6px;
+        padding: 6px;
+        background-color: rgb(226, 229, 232);
     }
+
 
     

@@ -11,6 +11,7 @@ import React, {useState, useEffect} from 'react'
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 
+
 function Technology() {
   //defines and sets the list of articles
   const [techArticleList, setTechArticleList] = useState([]);
@@ -25,14 +26,19 @@ function Technology() {
   //What is rendered to browser.
   return (
     <div>
-        <h1>Technology page...</h1>
+        <h1>Technology page</h1>
         {/**Display each article by name */}
         {techArticleList.map((value, key)=> {
           return (
             <div key={key}>
-              {/**Applies a link to the article name connecting to it's detail page. */}
-              <h3><Link to={{pathname: `${value._id}`}}>{value.name}</Link></h3>
+            {/*Turns the names into links to the respective article detaiil pages using the _id field as URL*/}
+            <div className='article-list'>
+              <Link to={{pathname: `${value._id}`}}>
+                <h3>{value.name}</h3>
+              </Link>
             </div>
+            
+          </div>
           )
         })}
     </div>
