@@ -1,7 +1,7 @@
 /**
  * Date: September 2022
  * Team: Wise Wellingtonians - Whitecliffe IT6037 Group Project
- * 
+ *
  * Main server file that deals with connecting to the Mongo database and all the API calls that axios uses
  * for CRUD operations.
  */
@@ -10,7 +10,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-require("dotenv").config({path: "./environment/.env"});
+require("dotenv").config({ path: "./environment/.env" });
 
 const app = express();
 
@@ -33,17 +33,13 @@ const port = API_PORT;
 const { MONGO_URI } = process.env;
 const mongoString = MONGO_URI;
 
-
 //Connect to the MongoDB database using the connection string specified inside the .env file
-mongoose.connect(
-  mongoString,
-  {
-    useNewUrlParser: true,
-  }
-);
+mongoose.connect(mongoString, {
+  useNewUrlParser: true,
+});
 
 // API to retrieve all data from the database
-app.get("/read", async (req, res) => {
+app.get("/read", auth, async (req, res) => {
   ArticleModel.find({}, (error, result) => {
     if (error) {
       res.send(error);
@@ -53,7 +49,7 @@ app.get("/read", async (req, res) => {
 });
 
 // API to retrieve all documents with the category type 'ARTS'
-app.get("/read/arts", async (req, res) => {
+app.get("/read/arts", auth, async (req, res) => {
   ArticleModel.find({ category: "Arts" }, (error, result) => {
     if (error) {
       res.send(error);
@@ -63,18 +59,17 @@ app.get("/read/arts", async (req, res) => {
 });
 
 // API to retrieve all documents with the category type 'Mathematics'
-app.get("/read/mathematics", async (req, res) => {
+app.get("/read/mathematics", auth, async (req, res) => {
   ArticleModel.find({ category: "Mathematics" }, (error, result) => {
     if (error) {
       res.send(error);
     }
     res.send(result);
   });
-
 });
 
 // API to retrieve all documents with the category type 'Technology'
-app.get("/read/technology", async (req, res) => {
+app.get("/read/technology", auth, async (req, res) => {
   ArticleModel.find({ category: "Technology" }, (error, result) => {
     if (error) {
       res.send(error);
@@ -84,13 +79,13 @@ app.get("/read/technology", async (req, res) => {
 });
 
 //API to get an article by ID
-app.get('/read/:id', async (req, res) => {
-    ArticleModel.findById(req.params.id, (error, result) => {
-        if (error){
-            return res.send(error);
-        }
-        return res.send(result);
-        });
+app.get("/read/:id", async (req, res) => {
+  ArticleModel.findById(req.params.id, (error, result) => {
+    if (error) {
+      return res.send(error);
+    }
+    return res.send(result);
+  });
 });
 
 // API to create a new article (POST)
@@ -142,8 +137,8 @@ app.put("/update/:id", async (req, res) => {
   const newArticleKnownFor = req.body.knownFor;
   const newArticleNotableWork = req.body.notableWork;
   const newArticleAbout = req.body.about;
-  
-  try{
+
+  try {
     await ArticleModel.findById(id, (err, updatedArticle) => {
       updatedArticle.category = newArticleCategory;
       updatedArticle.type = newArticleType;
@@ -152,15 +147,14 @@ app.put("/update/:id", async (req, res) => {
       updatedArticle.died = newArticleDied;
       updatedArticle.nationality = newArticleNationality;
       updatedArticle.knownFor = newArticleKnownFor;
-      updatedArticle.notableWork= newArticleNotableWork;
+      updatedArticle.notableWork = newArticleNotableWork;
       updatedArticle.about = newArticleAbout;
       //save the changes.
       updatedArticle.save();
       res.send("updated");
     });
-  }
-  catch(err){
-    console.log(err)
+  } catch (err) {
+    console.log(err);
   }
 });
 
@@ -177,49 +171,49 @@ app.delete("/delete/:id", async (req, res) => {
 // Register
 app.post("/register", async (req, res) => {
   try {
-      // Get user input
-      const { first_name, last_name, email, password } = req.body;
-      console.log(password);
-      // Validate user input
-      if (!(email && password && first_name && last_name)) {
-          res.status(400).send("All input is required");
-      }
-      console.log("passed validation...");
-      // check if user already exist
-      // Validate if user exist in our database
-      const oldUser = await UserModel.findOne({ email });
+    // Get user input
+    const { first_name, last_name, email, password } = req.body;
+    console.log(password);
+    // Validate user input
+    if (!(email && password && first_name && last_name)) {
+      res.status(400).send("All input is required");
+    }
+    console.log("passed validation...");
+    // check if user already exist
+    // Validate if user exist in our database
+    const oldUser = await UserModel.findOne({ email });
 
-      if (oldUser) {
-          return res.status(409).send("User Already Exist. Please Login");
-      }
-      console.log("registration attempt unique...");
-      //Encrypt user password
-      encryptedPassword = await bcrypt.hash(password, 10);
+    if (oldUser) {
+      return res.status(409).send("User Already Exist. Please Login");
+    }
+    console.log("registration attempt unique...");
+    //Encrypt user password
+    encryptedPassword = await bcrypt.hash(password, 10);
 
-      // Create user in our database
-      const user = await UserModel.create({
-          first_name,
-          last_name,
-          email: email.toLowerCase(), // sanitize: convert email to lowercase
-          password: encryptedPassword,
-      });
-      console.log("user created")
-      // Create token
-      // const token = jwt.sign(
-      //     { user_id: user._id, email },
-      //     process.env.TOKEN_KEY,
-      //     {
-      //     expiresIn: "2h",
-      //     }
-      // );
-      // // save user token
-      // user.token = token;
+    // Create user in our database
+    const user = await UserModel.create({
+      first_name,
+      last_name,
+      email: email.toLowerCase(), // sanitize: convert email to lowercase
+      password: encryptedPassword,
+    });
+    console.log("user created");
+    // Create token
+    // const token = jwt.sign(
+    //     { user_id: user._id, email },
+    //     process.env.TOKEN_KEY,
+    //     {
+    //     expiresIn: "2h",
+    //     }
+    // );
+    // // save user token
+    // user.token = token;
 
-      // return new user
-      return res.status(201).json(user);
-      // res.send('User added successfully');
+    // return new user
+    return res.status(201).json(user);
+    // res.send('User added successfully');
   } catch (error) {
-      console.log("Error in user creation: "+error);
+    console.log("Error in user creation: " + error);
   }
 });
 
@@ -228,41 +222,40 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   // our login logic goes here
   try {
-      const {email, password} = req.body;
+    const { email, password } = req.body;
 
-      //validate user input
-      if(!(email && password)){
-          res.status(400).send("All input is required");
-      }
+    //validate user input
+    if (!(email && password)) {
+      res.status(400).send("All input is required");
+    }
 
-      //validate if user exist in our database
-      const user = await UserModel.findOne({email});
+    //validate if user exist in our database
+    const user = await UserModel.findOne({ email });
 
-      //could be hanging here??
-      if(user && ( await bcrypt.compare(password, user.password))){
-          
-          // Create token
-          const token = jwt.sign(
-              {user_id: user._id, email},
-              process.env.TOKEN_KEY,
-              {
-                  expiresIn: "2h",
-              }
-          );
-          
-          // save user token
-          user.token = token;
-          
-          //user
-          return res.status(200).json(user);
-          // res.status(200).send(user);
-          // res.status(200).send("logged in successfully");
-      }
+    //could be hanging here??
+    if (user && (await bcrypt.compare(password, user.password))) {
+      // Create token
+      const token = jwt.sign(
+        { user_id: user._id, email },
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "2h",
+        }
+      );
 
-      res.status(400).send("Invalid Credentials");
+      // save user token
+      // user.token = token;
 
+      //user
+      res.json({ auth: true, token: token, user: user });
+      // return res.status(200).json(user);
+      // res.status(200).send(user);
+      // res.status(200).send("logged in successfully");
+    }
+
+    res.status(400).send("Invalid Credentials");
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 });
 
