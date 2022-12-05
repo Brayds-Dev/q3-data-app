@@ -17,7 +17,11 @@ function Arts() {
 
   // On load, use Axios to send an http request to one of our custom routes created in the server index.js file
   useEffect(()=> {
-      Axios.get("http://localhost:3001/read/arts").then((response)=> {
+      Axios.get("http://localhost:3001/read/arts", {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      }).then((response)=> {
         setArtsArticleList(response.data);
       });
     }, []);

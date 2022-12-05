@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Axios from 'axios';
+import axios from 'axios';
 import './Login.css'
 
 function Login() {
@@ -7,23 +7,21 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = () => {
-    Axios.post("http://localhost:3001/login", {
+  function handleSubmit() {
+    axios.post("http://localhost:3001/login", {
       email: email,
       password: password
-    })
-    .then((response) => response.json())
+    },
+    // {timeout: 1000}
+    )
+    // .then((response) => response.json())
     .then((response)=> {
       console.log("Is this working??");
       console.log(response.data);
 
       // attempt to set token to local browser storage
-      // const token = data.token;
-      // localStorage.setItem('token', token);
-
-      // setAuthToken(token);
-
-      alert('User created')
+      window.localStorage.setItem('token', response.data.token);
+      alert('User logged in')
       document.location.href="/";
     })
     .catch((error)=>{
@@ -35,7 +33,7 @@ function Login() {
     <div className="container">
       <h1> School DB Login</h1>
 
-      <form onSubmit={handleSubmit}>  
+      <form>  
         
           <label htmlFor="">Email</label>
           <input type="email" name="" id="" onChange={(event) => {setEmail(event.target.value)}}/>
@@ -46,8 +44,8 @@ function Login() {
           <input type="password" name="" id="" onChange={(event) => {setPassword(event.target.value)}} />
         
 
-          {/* <button onClick={handleSubmit}>Submit</button> */}
-          <input className="submit" type="submit" value="Submit" />
+          <button onClick={handleSubmit} type="button">Submit</button>
+          {/* <input className="submit" type="submit" value="Submit" /> */}
       
 
       </form>
