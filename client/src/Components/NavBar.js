@@ -11,14 +11,18 @@ import {Link} from 'react-router-dom';
 import './NavBar.css';
 
 function NavBar() {
+  const logOut = () => {
+      window.localStorage.clear();
+  } 
   return (
+    
     <div className="navbar">
       <nav>
 
         {/**All components aligned to the left of the screen */}
         <ul className="left">
           <li><Link to='/register'>Register</Link></li>
-          <li><Link to='/login'>Logout</Link></li>
+          <li onClick={logOut}><Link to='/login'>Logout</Link></li>
           <li><Link to='/'>Home</Link></li>
         </ul>
 

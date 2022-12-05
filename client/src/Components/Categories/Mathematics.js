@@ -17,7 +17,11 @@ function Mathematics() {
 
   //On load, use Axios to send an http request to one of our custom routes created in the server index.js file
   useEffect(()=> {
-    Axios.get("http://localhost:3001/read/mathematics").then((response)=> {
+    Axios.get("http://localhost:3001/read/mathematics", {
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    }).then((response)=> {
       setMathsArticleList(response.data);
     });
   }, []);

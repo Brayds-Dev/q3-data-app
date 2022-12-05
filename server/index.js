@@ -43,7 +43,7 @@ mongoose.connect(
 );
 
 // API to retrieve all data from the database
-app.get("/read", async (req, res) => {
+app.get("/read", auth, async (req, res) => {
   ArticleModel.find({}, (error, result) => {
     if (error) {
       res.send(error);
@@ -53,7 +53,7 @@ app.get("/read", async (req, res) => {
 });
 
 // API to retrieve all documents with the category type 'ARTS'
-app.get("/read/arts", async (req, res) => {
+app.get("/read/arts", auth, async (req, res) => {
   ArticleModel.find({ category: "Arts" }, (error, result) => {
     if (error) {
       res.send(error);
@@ -63,7 +63,7 @@ app.get("/read/arts", async (req, res) => {
 });
 
 // API to retrieve all documents with the category type 'Mathematics'
-app.get("/read/mathematics", async (req, res) => {
+app.get("/read/mathematics", auth, async (req, res) => {
   ArticleModel.find({ category: "Mathematics" }, (error, result) => {
     if (error) {
       res.send(error);
@@ -74,7 +74,7 @@ app.get("/read/mathematics", async (req, res) => {
 });
 
 // API to retrieve all documents with the category type 'Technology'
-app.get("/read/technology", async (req, res) => {
+app.get("/read/technology", auth, async (req, res) => {
   ArticleModel.find({ category: "Technology" }, (error, result) => {
     if (error) {
       res.send(error);
@@ -84,7 +84,7 @@ app.get("/read/technology", async (req, res) => {
 });
 
 //API to get an article by ID
-app.get('/read/:id', async (req, res) => {
+app.get('/read/:id', auth, async (req, res) => {
     ArticleModel.findById(req.params.id, (error, result) => {
         if (error){
             return res.send(error);

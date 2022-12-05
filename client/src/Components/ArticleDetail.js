@@ -71,7 +71,11 @@ function ArticleDetail(props)  {
   //this webhook performs this function immediately upon loading.
   useEffect(()=> {
     //Ask Axios politely to get just the article with this ID number.
-    Axios.get(`http://localhost:3001/read/${articleID}`).then((response)=> {
+    Axios.get(`http://localhost:3001/read/${articleID}`, {
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    }).then((response)=> {
       //assign the result to the the article variable
       setArticle(response.data);
     });

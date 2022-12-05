@@ -28,9 +28,12 @@ function Home() {
 
     //Using Axios send an http request to one of our custom routes created in the server index.js file
     useEffect(()=> {
-        Axios.get("http://localhost:3001/read", ).then((response)=> {
+        Axios.get("http://localhost:3001/read", {
+            headers: {
+              "x-access-token": window.localStorage.getItem("token"),
+            },
+          } ).then((response)=> {
           setArticleList(response.data);
-          
         })
         .catch((error)=>{
           console.log(error);
